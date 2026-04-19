@@ -1,11 +1,7 @@
-// SPDX-License-Identifier: GPL-2.0
 #include <linux/fs.h>
 #include <linux/init.h>
 #include <linux/proc_fs.h>
 #include <linux/seq_file.h>
-
-static int cmdline_proc_show(struct seq_file *m, void *v)
-{
 
 #ifdef CONFIG_KSU_SUSFS_SPOOF_CMDLINE_OR_BOOTCONFIG
 extern int susfs_spoof_cmdline_or_bootconfig(struct seq_file *m);
@@ -41,3 +37,4 @@ static int __init proc_cmdline_init(void)
 	return 0;
 }
 fs_initcall(proc_cmdline_init);
+

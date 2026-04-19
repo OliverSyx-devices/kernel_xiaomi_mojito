@@ -32,7 +32,7 @@ clone() {
 	# Setup and apply patch KernelSU in root dir
 	if ! [ -d "$KERNEL_DIR"/KernelSU-Next ]; then
 		log_info "-> Mendownload dan mensetup KernelSU..."
-		curl -LSs "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/next/kernel/setup.sh" | bash -s legacy 2>&1 | tee -a "$LOG_FILE"
+		curl -LSs "https://raw.githubusercontent.com/manipvlator/KernelSU-Next/stable/kernel/setup.sh" | bash -s syscall 2>&1 | tee -a "$LOG_FILE"
 	fi
 
 	# Menggunakan Clang bawaan Server / Host PATH
