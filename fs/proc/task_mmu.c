@@ -393,7 +393,7 @@ show_map_vma(struct seq_file *m, struct vm_area_struct *vma)
 
 #ifdef CONFIG_KSU_SUSFS_OPEN_REDIRECT
                 if (SUSFS_IS_INODE_OPEN_REDIRECT(inode)) {
-                        if (!susfs_open_redirect_spoof_show_map_vma(inode, &ino, &dev, &spoofed_redirected_name)) {
+                        if (!susfs_open_redirect_spoof_show_map_vma(inode, &ino, &dev, spoofed_redirected_name)) {
                                 pgoff = ((loff_t)vma->vm_pgoff) << PAGE_SHIFT;
                                 goto orig_flow;
                         }

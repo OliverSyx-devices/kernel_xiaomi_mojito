@@ -2391,29 +2391,33 @@ proc_map_files_readdir(struct file *file, struct dir_context *ctx)
 		}
 		for (i = 0, vma = mm->mmap, pos = 2; vma;
 				vma = vma->vm_next) {
+			
+			// Deklarasi variabel diletakkan di paling atas blok perulangan for
+			char local_name[64];
+			int local_len;
+
 			if (!vma->vm_file)
 				continue;
 #ifdef CONFIG_KSU_SUSFS_SUS_MAP
-                        if (SUSFS_IS_INODE_SUS_MAP(file_inode(vma->vm_file)))
-                                continue;
+			if (SUSFS_IS_INODE_SUS_MAP(file_inode(vma->vm_file)))
+				continue;
 #endif
-                        if (++pos <= ctx->pos)
-                                continue;
+			if (++pos <= ctx->pos)
+				continue;
 
-                        info.start = vma->vm_start;
-                        info.end = vma->vm_end;
-                        info.mode = vma->vm_file->f_mode;
+			info.start = vma->vm_start;
+			info.end = vma->vm_end;
+			info.mode = vma->vm_file->f_mode;
 
-                        // Solusi: Gunakan variabel lokal biasa karena struct info tidak punya member 'len' dan 'name'
-                        char local_name[64];
-                        int local_len;
-                        local_len = snprintf(local_name, sizeof(local_name), "%lx-%lx",
-                                             vma->vm_start, vma->vm_end);
+			// Eksekusi kode setelah semua variabel dideklarasikan
+			local_len = snprintf(local_name, sizeof(local_name), "%lx-%lx",
+					     vma->vm_start, vma->vm_end);
 
-                        if (flex_array_put(fa, i++, &info, GFP_KERNEL))
-                                BUG();
-                }
-        }
+			if (flex_array_put(fa, i++, &info, GFP_KERNEL))
+				BUG();
+		}
+	}
+
 
 	up_read(&mm->mmap_sem);
 
