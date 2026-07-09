@@ -28,5 +28,5 @@
 									"wlan_fw_rsp_wakelock;CHG_PLCY_MAIN_WL"
 
 #define LENGTH_LIST_WL				1024
-#define LENGTH_LIST_WL_DEFAULT		(strlen(LIST_WL_DEFAULT) + 1)
+#define LENGTH_LIST_WL_DEFAULT		(sizeof(LIST_WL_DEFAULT) + 1)
 #define LENGTH_LIST_WL_SEARCH		LENGTH_LIST_WL + LENGTH_LIST_WL_DEFAULT + 5
